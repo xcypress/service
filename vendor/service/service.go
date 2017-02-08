@@ -12,8 +12,8 @@ import  (
 )
 
 const (
-    DEFAULT_SERVICE_PATH      = "/services"
-    DEFAULT_SERVICE_NAME_FILE = "services/names"
+    DefaultServicePath = "/services"
+    DefualtServiceName = "services/names"
     DEFAULT_ETCD_HOST         = "http://172.17.0.2:2379"
 )
 
@@ -60,10 +60,10 @@ func (sm *ServiceMgr) OnInit() {
     names := sm.loadNames()
 
     for _, name := range names {
-        sm.known_names[DEFAULT_SERVICE_PATH + "/" + strings.TrimSpace(name)] = true
+        sm.known_names[DefaultServicePath + "/" + strings.TrimSpace(name)] = true
     }
 
-    sm.connectAll(DEFAULT_SERVICE_PATH)
+    sm.connectAll(DefaultServicePath)
 
 }
 
@@ -78,7 +78,7 @@ func (sm *ServiceMgr) OnTick() {
 
 func (sm *ServiceMgr) watcher() {
     kApi := client.NewKeysAPI(sm.etcdClient)
-    watcher := kApi.Watcher(DEFAULT_SERVICE_PATH, &client.WatcherOptions{Recursive:true})
+    watcher := kApi.Watcher(DefaultServicePath, &client.WatcherOptions{Recursive:true})
 
     for {
         rsp, err := watcher.Next(context.Background())
@@ -115,8 +115,8 @@ func (sm *ServiceMgr) watcher() {
 
 func (sm *ServiceMgr) loadNames() []string {
     kApi := client.NewKeysAPI(sm.etcdClient)
-    fmt.Println("reading names :", DEFAULT_SERVICE_NAME_FILE)
-    rsp, err := kApi.Get(context.Background(), DEFAULT_SERVICE_NAME_FILE, nil)
+    fmt.Println("reading names :", DefualtServiceName)
+    rsp, err := kApi.Get(context.Background(), DefualtServiceName, nil)
     if err != nil {
         fmt.Println(err)
         return nil
