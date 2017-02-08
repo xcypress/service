@@ -38,6 +38,7 @@ func (tq *TimerQueue) OnTick() {
         timer.cb()
     case ticker := <- tq.TickerMQ:
         ticker.cb()
+    default:
     }
 }
 

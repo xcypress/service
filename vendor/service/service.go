@@ -64,7 +64,6 @@ func (sm *ServiceMgr) OnInit() {
     }
 
     sm.connectAll(DefaultServicePath)
-
 }
 
 func (sm *ServiceMgr) OnTick() {
@@ -73,6 +72,7 @@ func (sm *ServiceMgr) OnTick() {
         sm.addService(node.key, node.conn)
     case key := <-sm.removeServiceMQ:
         sm.removeService(key)
+    default:
     }
 }
 
