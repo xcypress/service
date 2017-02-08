@@ -20,7 +20,7 @@ type GameModule struct {
 func (gm *GameModule) OnInit() bool {
     timerQueue = new(timer.TimerQueue)
     serviceMgr = new(service.ServiceMgr)
-    
+
     timerQueue.OnInit()
     timerQueue.AddTimer(time.Second*5, func() {
         fmt.Println("timer is out")
@@ -30,7 +30,8 @@ func (gm *GameModule) OnInit() bool {
 }
 
 func (gm *GameModule) Run(interval time.Duration, closeSig chan os.Signal) {
-    ticker := time.NewTicker(interval)
+    fmt.Println(interval)
+    ticker := time.NewTicker(time.Second*5)
     for {
         timerQueue.OnTick()
         serviceMgr.OnTick()
@@ -39,7 +40,6 @@ func (gm *GameModule) Run(interval time.Duration, closeSig chan os.Signal) {
         case <-ticker.C:
             fmt.Println("ticker")
         case <-closeSig:
-        //todo 结束循环
             return
         }
     }
