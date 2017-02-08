@@ -22,7 +22,7 @@ func (gm *GameModule) OnInit() bool {
     serviceMgr = new(service.ServiceMgr)
 
     timerQueue.OnInit()
-    timerQueue.AddTimer(time.Second*5, func() {
+    timerQueue.AddTimer(time.Second * 3, func() {
         fmt.Println("timer is out")
     })
     serviceMgr.OnInit()
@@ -41,6 +41,7 @@ func (gm *GameModule) Run(interval time.Duration, closeSig chan os.Signal) {
             fmt.Println("ticker")
         case <-closeSig:
             return
+        default:
         }
     }
 }
