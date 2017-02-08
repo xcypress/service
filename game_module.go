@@ -18,6 +18,9 @@ type GameModule struct {
 }
 
 func (gm *GameModule) OnInit() bool {
+    timerQueue = new(timer.TimerQueue)
+    serviceMgr = new(service.ServiceMgr)
+    
     timerQueue.OnInit()
     timerQueue.AddTimer(time.Second*5, func() {
         fmt.Println("timer is out")
