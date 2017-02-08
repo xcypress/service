@@ -1,0 +1,28 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;game&gt;">
+    <CLASSES>
+      <root url="file://Z:/server/trunk/src/golang.org" />
+      <root url="file://Z:/server/trunk/src/.idea" />
+      <root url="file://Z:/server/trunk/src/tools" />
+      <root url="file://Z:/server/trunk/src/hanqu" />
+      <root url="file://Z:/server/trunk/src/code.google.com" />
+      <root url="file://Z:/server/trunk/src/tests" />
+      <root url="file://Z:/server/trunk/src/hgame" />
+      <root url="file://Z:/server/trunk/src/github.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://Z:/server/trunk/src/golang.org" />
+      <root url="file://Z:/server/trunk/src/.idea" />
+      <root url="file://Z:/server/trunk/src/tools" />
+      <root url="file://Z:/server/trunk/src/hanqu" />
+      <root url="file://Z:/server/trunk/src/code.google.com" />
+      <root url="file://Z:/server/trunk/src/tests" />
+      <root url="file://Z:/server/trunk/src/hgame" />
+      <root url="file://Z:/server/trunk/src/github.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
