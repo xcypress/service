@@ -26,14 +26,14 @@ func (gm *GameModule) OnInit() bool {
     return true
 }
 
-func (gm *GameModule) Run(interval time.Duration, closeSig os.Signal) {
+func (gm *GameModule) Run(interval time.Duration, closeSig chan os.Signal) {
     ticker := time.NewTicker(interval)
     for {
         timerQueue.OnTick()
         serviceMgr.OnTick()
 
         select {
-        case ticker.C:
+        case <-ticker.C:
             fmt.Println("ticker")
         case <-closeSig:
         //todo 结束循环
