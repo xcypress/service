@@ -33,7 +33,7 @@ type ServiceMgr struct {
     etcdClient      client.Client
 }
 
-func (sm *ServiceMgr) init() {
+func (sm *ServiceMgr) OnInit() {
 
     machines := []string{DEFAULT_ETCD_HOST}
     if env := os.Getenv("ETCD_HOST"); env != "" {

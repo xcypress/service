@@ -27,7 +27,7 @@ type TimerQueue struct {
     TickerMQ chan *SimpleTicker
 }
 
-func (tq *TimerQueue) init() {
+func (tq *TimerQueue) OnInit() {
     tq.TimerMQ = make(chan *SimpleTimer, 100)
     tq.TickerMQ = make(chan *SimpleTicker, 100)
 }
@@ -42,15 +42,15 @@ func (tq *TimerQueue) OnTick() {
 }
 
 func (tq *TimerQueue) OnFinal() {
-    for _, timer := range tq.TimerMQ {
+    for timer := range tq.TimerMQ {
         timer.Stop()
     }
-    for _, ticker := range tq.TimerMQ {
+    for ticker := range tq.TimerMQ {
         ticker.Stop()
     }
 }
 
-func (tq *TimerQueue) AddTimer(d time.Duration, f func()) {
+func (tq *TimerQueue) AddTimer(d time.Duration, f func()) *SimpleTimer {
     timer := new(SimpleTimer)
     timer.cb = f
     timer.t = time.AfterFunc(d, func() {
@@ -59,7 +59,7 @@ func (tq *TimerQueue) AddTimer(d time.Duration, f func()) {
     return timer
 }
 
-func (tq *TimerQueue) AddTicker(d time.Duration, f func()) {
+func (tq *TimerQueue) AddTicker(d time.Duration, f func()) *SimpleTicker{
     ticker := new(SimpleTicker)
     ticker.cb = f
     ticker.t = time.NewTicker(d)
@@ -70,6 +70,7 @@ func (tq *TimerQueue) AddTicker(d time.Duration, f func()) {
             tq.TickerMQ <- ticker
         }
     }
+    return ticker
 }
 
 
