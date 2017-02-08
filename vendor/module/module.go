@@ -10,7 +10,7 @@ import (
 type Module interface {
     OnInit() bool
     OnFinal()
-    Run(interval time.Duration, closeSig os.Signal)
+    Run(interval time.Duration, closeSig chan os.Signal)
 }
 
 type Application struct {
