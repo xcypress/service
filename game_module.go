@@ -35,6 +35,9 @@ func (gm *GameModule) Run(interval time.Duration, closeSig os.Signal) {
         select {
         case ticker.C:
             fmt.Println("ticker")
+        case <-closeSig:
+        //todo 结束循环
+            return
         }
     }
 }
