@@ -12,6 +12,6 @@ func main() {
     GameModule := &GameModule{}
 
     app.Register(GameModule)
-    app.SetInterval(time.Microsecond * DefaultInterval)
+    app.SetInterval(time.Second * DefaultInterval)
     app.Run()
 }
