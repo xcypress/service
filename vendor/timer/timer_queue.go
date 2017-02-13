@@ -1,6 +1,9 @@
 package timer
 
-import "time"
+import (
+    "time"
+    "fmt"
+)
 
 type  SimpleTimer struct {
     t *time.Timer
@@ -32,7 +35,7 @@ func (tq *TimerQueue) OnInit() {
     tq.TickerMQ = make(chan *SimpleTicker, 100)
 }
 
-func (tq *TimerQueue) OnTick() {
+func (tq *TimerQueue) Select() {
     select {
     case timer := <- tq.TimerMQ:
         timer.cb()
@@ -49,6 +52,7 @@ func (tq *TimerQueue) OnFinal() {
     for ticker := range tq.TimerMQ {
         ticker.Stop()
     }
+    fmt.Println("timerQueue onfinal")
 }
 
 func (tq *TimerQueue) AddTimer(d time.Duration, f func()) *SimpleTimer {

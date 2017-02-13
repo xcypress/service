@@ -14,7 +14,7 @@ import  (
 const (
     DefaultServicePath = "/services"
     DefualtServiceName = "services/names"
-    DEFAULT_ETCD_HOST         = "http://172.17.0.2:2379"
+    DEFAULT_ETCD_HOST  = "http://172.17.0.2:2379"
 )
 
 type node struct {
@@ -66,7 +66,7 @@ func (sm *ServiceMgr) OnInit() {
     sm.connectAll(DefaultServicePath)
 }
 
-func (sm *ServiceMgr) OnTick() {
+func (sm *ServiceMgr) Select() {
     select {
     case node := <-sm.addServiceMQ:
         sm.addService(node.key, node.conn)
