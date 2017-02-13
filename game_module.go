@@ -14,6 +14,7 @@ var (
 )
 
 type GameModule struct {
+    ticker time.Ticker
 
 }
 
@@ -27,19 +28,19 @@ func (gm *GameModule) OnInit() bool {
     timerQueue.AddTimer(time.Second * 3, func() {
         fmt.Println("timer is out")
     })
+    gm.ticker = time.NewTicker(time.Second*5)
     serviceMgr.OnInit()
     return true
 }
 
-func (gm *GameModule) Run(interval time.Duration, closeSig chan os.Signal) {
-    ticker := time.NewTicker(interval)
+func (gm *GameModule) Run(closeSig chan os.Signal) {
     for {
         timerQueue.Select()
         serviceMgr.Select()
         //todo 网络部分netWork.Select()
 
         select {
-        case <-ticker.C:
+        case <-gm.ticker.C:
             //test ticker
             //todo 主逻辑中的tick驱动 npc ai...
             //example sceneMgr.OnTick() playerMgr.OnTick()
